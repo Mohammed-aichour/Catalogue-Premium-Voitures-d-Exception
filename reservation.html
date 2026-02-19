@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking | Test Drive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #d4af37; --bg: #000; --text: #fff; }
+        body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); }
+
+        /* FOND DYNAMIQUE */
+        .bg-fixed {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1542282088-fe8426682b8f?q=80&w=1920') center/cover;
+        }
+
+        header { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .close-btn { color: #fff; font-size: 1.5rem; transition: 0.3s; cursor: pointer; }
+        .close-btn:hover { color: var(--primary); transform: rotate(90deg); }
+
+        /* CARD PRINCIPALE */
+        .booking-wrapper {
+            display: flex; justify-content: center; align-items: center; min-height: 80vh; padding: 20px;
+        }
+
+        .booking-card {
+            width: 100%; max-width: 500px;
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 40px; border-radius: 2px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        .title-section { text-align: center; margin-bottom: 30px; }
+        h2 { margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 5px; }
+        .subtitle { color: var(--primary); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; display: block; }
+
+        .form-group { margin-bottom: 25px; }
+        label { display: block; font-size: 0.75rem; color: #888; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Select et Date stylisés */
+        select, input[type="date"], input[type="text"] {
+            width: 100%; padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff; font-family: 'Poppins'; font-size: 0.9rem;
+            outline: none; border-radius: 4px; appearance: none;
+        }
+        
+        select { cursor: pointer; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23d4af37%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 15px center; background-size: 10px; }
+        
+        /* Options fond noir */
+        select option { background-color: #111; color: #fff; padding: 10px; }
+
+        /* Style quand c'est désactivé (disabled) */
+        select:disabled { opacity: 0.5; cursor: not-allowed; border-color: transparent; }
+
+        input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+        input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
+
+        .btn-book {
+            width: 100%; background: var(--primary); color: #000;
+            border: none; padding: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+            cursor: pointer; margin-top: 10px; transition: 0.3s;
+        }
+        .btn-book:hover { background: #fff; }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 500px) { .booking-card { padding: 25px; width: 100%; } }
+    </style>
+</head>
+<body>
+    <div class="bg-fixed"></div>
+
+    <header>
+        <div class="logo-area" style="font-weight: 800; letter-spacing: 2px;">RESERVATION</div>
+        <a href="index.html" class="close-btn"><i class="fas fa-times"></i></a>
+    </header>
+
+    <div class="booking-wrapper">
+        <div class="booking-card">
+            <div class="title-section">
+                <h2>Réserver un essai</h2>
+                <span class="subtitle">Configuration</span>
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <label>1. Choisir la Marque</label>
+                    <select id="brandSelect" onchange="updateModels()">
+                        <option value="" disabled selected>Sélectionner...</option>
+                        <option value="mercedes">Mercedes-Benz</option>
+                        <option value="audi">Audi</option>
+                        <option value="bmw">BMW</option>
+                        <option value="porsche">Porsche</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>2. Choisir le Modèle</label>
+                    <select id="modelSelect" disabled>
+                        <option value="" disabled selected>-- En attente de marque --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Date Souhaitée</label>
+                    <input type="date">
+                </div>
+
+                <div class="form-group">
+                    <label>Numéro de téléphone</label>
+                    <input type="text" placeholder="+212 6..." >
+                </div>
+
+                <button type="button" class="btn-book">Confirmer la demande</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // La base de données de nos voitures
+        const carData = {
+            mercedes: [
+                "AMG GT 63 S E-Performance",
+                "Classe G 63 AMG",
+                "Classe S 580 Maybach",
+                "EQS 53 AMG"
+            ],
+            audi: [
+                "RS Q8 Performance",
+                "RS 6 Avant",
+                "RS 7 Sportback",
+                "R8 V10 Performance",
+                "e-tron GT RS"
+            ],
+            bmw: [
+                "M4 CSL",
+                "M5 Competition",
+                "M8 Gran Coupé",
+                "XM Label Red",
+                "i7 M70"
+            ],
+            porsche: [
+                "911 GT3 RS",
+                "911 Turbo S",
+                "Panamera Turbo S E-Hybrid",
+                "Cayenne Turbo GT",
+                "Taycan Turbo S"
+            ]
+        };
+
+        function updateModels() {
+            // On récupère les deux menus
+            const brandSelect = document.getElementById("brandSelect");
+            const modelSelect = document.getElementById("modelSelect");
+            
+            // La marque choisie (ex: "audi")
+            const selectedBrand = brandSelect.value;
+
+            // 1. On vide le menu des modèles
+            modelSelect.innerHTML = "";
+
+            if(selectedBrand) {
+                // Si une marque est choisie, on active le menu modèle
+                modelSelect.disabled = false;
+
+                // Option par défaut
+                let defaultOption = document.createElement("option");
+                defaultOption.text = "Choisir le modèle...";
+                defaultOption.disabled = true;
+                defaultOption.selected = true;
+                modelSelect.add(defaultOption);
+
+                // On récupère la liste des voitures pour cette marque
+                const models = carData[selectedBrand];
+
+                // On crée une option pour chaque voiture
+                models.forEach(function(car) {
+                    let option = document.createElement("option");
+                    option.text = car;
+                    option.value = car;
+                    modelSelect.add(option);
+                });
+
+            } else {
+                // Si aucune marque, on désactive le menu modèle
+                modelSelect.disabled = true;
+                let option = document.createElement("option");
+                option.text = "-- En attente de marque --";
+                modelSelect.add(option);
+            }
+        }
+    </script>
+</body>
+</html>

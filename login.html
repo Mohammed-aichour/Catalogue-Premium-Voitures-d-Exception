@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access | Premium Cockpit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="login-css.css">
+</head>
+<body>
+
+    <a href="index.html" class="btn-home">
+        <i class="fa fa-arrow-left"></i> Retour au showroom
+    </a>
+
+    <main class="login-wrapper">
+        <div class="glass-container">
+            
+            <div class="form-tabs">
+                <button class="tab-btn active" onclick="switchForm('login')">Log In</button>
+                <button class="tab-btn" onclick="switchForm('signup')">Sign Up</button>
+                <div class="tab-indicator"></div>
+            </div>
+
+            <div class="form-viewport">
+                <div class="form-track" id="formTrack">
+                    
+                    <div class="form-box login-box active-box" id="loginForm">
+                        <h4>Bienvenue</h4>
+                        <p class="form-subtitle">Accédez à votre espace personnel.</p>
+                        
+                        <div class="input-group">
+                            <i class="fa fa-at"></i>
+                            <input type="email" placeholder="Votre Email" autocomplete="off">
+                        </div>
+                        <div class="input-group">
+                            <i class="fa fa-lock"></i>
+                            <input type="password" placeholder="Mot de passe" autocomplete="off">
+                        </div>
+                        
+                        <div class="actions">
+                            <a href="#" class="forgot-link">Mot de passe oublié ?</a>
+                        </div>
+                        
+                        <button class="btn-submit">Démarrer</button>
+                    </div>
+                    
+                    <div class="form-box signup-box" id="signupForm">
+                        <h4>Créer un compte</h4>
+                        <p class="form-subtitle">Rejoignez le club exclusif.</p>
+                        
+                        <div class="input-group">
+                            <i class="fa fa-user"></i>
+                            <input type="text" placeholder="Nom Complet" autocomplete="off">
+                        </div>
+                        <div class="input-group">
+                            <i class="fa fa-at"></i>
+                            <input type="email" placeholder="Votre Email" autocomplete="off">
+                        </div>
+                        <div class="input-group">
+                            <i class="fa fa-lock"></i>
+                            <input type="password" placeholder="Choisir un mot de passe" autocomplete="off">
+                        </div>
+                        
+                        <button class="btn-submit">S'inscrire</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const track = document.getElementById('formTrack');
+        const tabs = document.querySelectorAll('.tab-btn');
+        const indicator = document.querySelector('.tab-indicator');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+
+        function switchForm(type) {
+            // Reset des onglets
+            tabs.forEach(t => t.classList.remove('active'));
+            
+            // Reset des lumières (on éteint tout d'abord)
+            loginForm.classList.remove('active-box');
+            signupForm.classList.remove('active-box');
+
+            if (type === 'login') {
+                tabs[0].classList.add('active');
+                track.style.transform = 'translateX(0)';
+                indicator.style.left = '0';
+                
+                // On allume le Login
+                loginForm.classList.add('active-box');
+            } else {
+                tabs[1].classList.add('active');
+                track.style.transform = 'translateX(-50%)';
+                indicator.style.left = '50%';
+                
+                // On allume le Signup
+                signupForm.classList.add('active-box');
+            }
+        }
+    </script>
+
+</body>
+</html>

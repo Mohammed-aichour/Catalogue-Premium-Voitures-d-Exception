@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porsche | There is no substitute</title>
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@100;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="gallery-porsche-css.css">
+</head>
+<body>
+
+    <nav class="slider-nav">
+        <a href="page-porsche-html.html" class="back-link">
+            <span class="icon">✕</span> Close
+        </a>
+        <div class="brand">PORSCHE <span class="model-badge">GT</span></div>
+        <div class="slide-counter">
+            <span id="current-num">01</span><span class="bar"></span><span id="total-num">05</span>
+        </div>
+    </nav>
+
+    <div class="slider-container">
+        
+        <div class="slide active">
+            <div class="slide-img" style="background-image: url('images/ps.webp');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">TIMELESS</h2>
+                <p class="slide-desc">Une silhouette unique. Une identité qui traverse les décennies sans jamais vieillir.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/ps2.avif');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">PRECISION</h2>
+                <p class="slide-desc">Née sur le circuit, construite pour la route. L'ingénierie au service de l'adrénaline.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/ps3.avif');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">FUTURE</h2>
+                <p class="slide-desc">L'âme de la conduite sportive, réinventée par la technologie de demain.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/ps4.avif');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">MASTERPIECE</h2>
+                <p class="slide-desc">La recherche absolue de la perfection, repoussant les limites de la physique.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/ps5.avif');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">LEGACY</h2>
+                <p class="slide-desc">Ce n'est pas seulement une voiture, c'est une histoire qui se transmet.</p>
+            </div>
+        </div>
+
+        <div class="nav-controls">
+            <button class="nav-btn prev" onclick="changeSlide(-1)">&#8592;</button>
+            <div class="progress-track">
+                <div class="progress-bar" id="progress"></div>
+            </div>
+            <button class="nav-btn next" onclick="changeSlide(1)">&#8594;</button>
+        </div>
+
+    </div>
+
+    <script>
+        let index = 0;
+        const slides = document.querySelectorAll('.slide');
+        const currentNum = document.getElementById('current-num');
+        const progressBar = document.getElementById('progress');
+        const totalSlides = slides.length;
+
+        document.getElementById('total-num').innerText = totalSlides < 10 ? '0' + totalSlides : totalSlides;
+
+        function changeSlide(direction) {
+            slides[index].classList.remove('active');
+            index += direction;
+            if (index >= totalSlides) index = 0;
+            if (index < 0) index = totalSlides - 1;
+            slides[index].classList.add('active');
+            currentNum.innerText = (index + 1) < 10 ? '0' + (index + 1) : (index + 1);
+            
+            // Mise à jour de la barre
+            const progressWidth = ((index + 1) / totalSlides) * 100;
+            progressBar.style.width = progressWidth + '%';
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "ArrowRight") changeSlide(1);
+            if (event.key === "ArrowLeft") changeSlide(-1);
+        });
+        // Init
+        const initialProgress = (1 / totalSlides) * 100;
+        progressBar.style.width = initialProgress + '%';
+    </script>
+</body>
+</html>

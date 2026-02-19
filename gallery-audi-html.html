@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie Sport | Audi Exclusive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="gallery-audi-css.css">
+</head>
+<body>
+
+    <nav class="slider-nav">
+        <a href="page-audi-html.html" class="back-link">
+            <span class="icon">✕</span> Retour
+        </a>
+        <div class="brand">AUDI <span class="accent-txt">SPORT</span></div>
+        <div class="slide-counter">
+            <span id="current-num">01</span><span class="divider">/</span><span id="total-num">05</span>
+        </div>
+    </nav>
+
+    <div class="slider-container">
+        
+        <div class="slide active">
+            <div class="slide-img" style="background-image: url(images/ad.jpg);"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Unleashed</h2>
+                <p class="slide-desc">La puissance à l'état brut dans une silhouette familiale.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url(images/ad2.jpg);"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Pocket Rocket</h2>
+                <p class="slide-desc">Le légendaire 5 cylindres. Une sonorité unique, une performance addictive.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url(images/ad4.jpg);"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Progress</h2>
+                <p class="slide-desc">Le futur est une attitude. L'électrique redéfini par Audi.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url(images/ad3.jpg);"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Adrénaline</h2>
+                <p class="slide-desc">Née sur le circuit, construite pour la route.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url(images/ad5.jpg);"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Quattro</h2>
+                <p class="slide-desc">Vorsprung durch Technik. La maîtrise totale, peu importe les conditions.</p>
+            </div>
+        </div>
+
+        <button class="nav-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="nav-btn next" onclick="changeSlide(1)">&#10095;</button>
+
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress"></div>
+        </div>
+
+    </div>
+
+    <script>
+        let index = 0;
+        const slides = document.querySelectorAll('.slide');
+        const currentNum = document.getElementById('current-num');
+        const progressBar = document.getElementById('progress');
+        const totalSlides = slides.length;
+
+        // Met à jour le total dynamique
+        document.getElementById('total-num').innerText = totalSlides < 10 ? '0' + totalSlides : totalSlides;
+
+        function changeSlide(direction) {
+            slides[index].classList.remove('active');
+
+            index += direction;
+            if (index >= totalSlides) index = 0;
+            if (index < 0) index = totalSlides - 1;
+
+            slides[index].classList.add('active');
+
+            currentNum.innerText = (index + 1) < 10 ? '0' + (index + 1) : (index + 1);
+
+            const progressWidth = ((index + 1) / totalSlides) * 100;
+            progressBar.style.width = progressWidth + '%';
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "ArrowRight") changeSlide(1);
+            if (event.key === "ArrowLeft") changeSlide(-1);
+        });
+
+        // Initialisation pour que la barre de progression soit correcte au chargement
+        const initialProgress = (1 / totalSlides) * 100;
+        progressBar.style.width = initialProgress + '%';
+    </script>
+</body>
+</html>

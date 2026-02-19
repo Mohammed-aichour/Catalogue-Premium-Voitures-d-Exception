@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M Performance | BMW</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="gallery-bmw-css.css">
+</head>
+<body>
+
+    <nav class="slider-nav">
+        <a href="page-bmw-html.html" class="back-link">
+            <span class="icon">✕</span> Menu
+        </a>
+        <div class="brand">
+            <span style="color:#008ac9">/</span><span style="color:#2b115a">/</span><span style="color:#f10202">/</span>M <span class="accent-txt">PERFORMANCE</span>
+        </div>
+        <div class="slide-counter">
+            <span id="current-num">01</span><span class="divider">/</span><span id="total-num">05</span>
+        </div>
+    </nav>
+
+    <div class="slider-container">
+        
+        <div class="slide active">
+            <div class="slide-img" style="background-image: url('images/bm.webp');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">THE M4</h2>
+                <p class="slide-desc">Un design controversé pour des performances indiscutables.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/bm1.webp');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">MONSTER</h2>
+                <p class="slide-desc">La berline la plus puissante jamais construite par M.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/bm2.webp');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">LEGEND</h2>
+                <p class="slide-desc">Là où tout a commencé. Pureté mécanique.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/bm3.webp');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">GRAND TOURER</h2>
+                <p class="slide-desc">Le sommet du luxe fusionné avec l'ADN de la piste.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/bm4.webp');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">ELECTRIFIED</h2>
+                <p class="slide-desc">Le plaisir de conduire réinventé pour demain.</p>
+            </div>
+        </div>
+
+        <button class="nav-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="nav-btn next" onclick="changeSlide(1)">&#10095;</button>
+
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress"></div>
+        </div>
+
+    </div>
+
+    <script>
+        let index = 0;
+        const slides = document.querySelectorAll('.slide');
+        const currentNum = document.getElementById('current-num');
+        const progressBar = document.getElementById('progress');
+        const totalSlides = slides.length;
+
+        document.getElementById('total-num').innerText = totalSlides < 10 ? '0' + totalSlides : totalSlides;
+
+        function changeSlide(direction) {
+            slides[index].classList.remove('active');
+            index += direction;
+            if (index >= totalSlides) index = 0;
+            if (index < 0) index = totalSlides - 1;
+            slides[index].classList.add('active');
+            currentNum.innerText = (index + 1) < 10 ? '0' + (index + 1) : (index + 1);
+            const progressWidth = ((index + 1) / totalSlides) * 100;
+            progressBar.style.width = progressWidth + '%';
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "ArrowRight") changeSlide(1);
+            if (event.key === "ArrowLeft") changeSlide(-1);
+        });
+
+        const initialProgress = (1 / totalSlides) * 100;
+        progressBar.style.width = initialProgress + '%';
+    </script>
+</body>
+</html>

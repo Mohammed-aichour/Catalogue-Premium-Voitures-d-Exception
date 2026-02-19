@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue Premium – Voitures d'Exception</title>
+
+    <!-- SEO de base -->
+    <meta name="description"
+          content="Catalogue premium de voitures d'exception : Audi, BMW, Mercedes, Porsche. Découvrez une sélection haut de gamme et réservez votre prochaine expérience de conduite.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/vd-pc.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="index-css.css">
+</head>
+
+<body>
+
+    <div class="bg-animation"></div>
+
+    <nav class="navbar navbar-expand-xl fixed-top navbar-custom">
+        <div class="container-fluid">
+
+            <a class="navbar-brand navbar-brand-center" href="index.html">
+                <h2>CATALOGUE&nbsp;PREMIUM</h2>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-xl-0">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="collection.html">Collections</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reservation.html">Réservation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+
+                <div class="d-none d-xl-block mx-auto" style="width: 200px;"></div>
+
+                <div class="btn-auth-wrapper ms-auto">
+                    <a href="login.html" class="btn-modern">Connexion</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="hero-section">
+        <div class="hero-content">
+            <p class="hero-subtitle animate-item delay-1">Exceptionnel & Intemporel</p>
+
+            <h1 class="hero-title animate-item delay-2">DÉCOUVREZ VOTRE <br> <span>CONDUITE ABSOLUE</span></h1>
+
+            <div class="ticker-wrapper animate-item delay-3">
+                <div class="ticker-text">
+                    <span>Disponible dès maintenant : Audi RS Q8 Performance — Mercedes-AMG SL ROADSTER — MAYBACH
+                        S-CLASS — BMW M4 CSL</span>
+                </div>
+            </div>
+
+            <a href="collection.html" class="animate-item delay-4" style="text-decoration: none;">
+                <div class="btn-explore-speed">
+                    <span>Collection</span>
+                </div>
+            </a>
+        </div>
+    </main>
+    <div class="dashboard-clock animate-item">
+        <div class="clock-luxury">
+            <div class="time-wrapper">
+                <span id="hours">00</span>
+                <span class="dots">:</span> <span id="minutes">00</span>
+            </div>
+            <div class="divider"></div>
+            <div class="meta-wrapper">
+                <div class="seconds-badge">
+                    <span id="seconds">00</span> <span class="sec-label">SEC</span>
+                </div>
+                <div id="date" class="date-text">...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        //! FONCTION QUI MET À JOUR L'HORLOGE
+        function updateClock() {
+            const now = new Date(); // Récupère la date/heure actuelle
+
+            // Mise à jour des chiffres. .padStart(2, '0') ajoute un zéro devant (ex: 9 devient 09)
+            document.getElementById('hours').textContent = String(now.getHours()).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(now.getSeconds()).padStart(2, '0');
+
+            // Mise à jour de la date (Format: 31 DEC)
+            const options = { day: 'numeric', month: 'short' };
+            const dateStr = now.toLocaleDateString('fr-FR', options).replace('.', '').toUpperCase();
+            document.getElementById('date').textContent = dateStr;
+        }
+
+        // Lance la fonction toutes les 1000ms (1 seconde)
+        setInterval(updateClock, 1000);
+        // Lance la fonction immédiatement au chargement pour ne pas attendre 1 seconde
+        updateClock();
+    </script>
+</body>
+
+</html>

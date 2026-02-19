@@ -1,0 +1,194 @@
+/* --- BASE & TYPOGRAPHY --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #000;
+    color: #fff;
+    overflow: hidden;
+}
+
+/* =========================================
+   ANIMATIONS KEYFRAMES
+   ========================================= */
+@keyframes slideDownHeader {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideUpCol {
+    from { transform: translateY(100vh); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInText {
+    from { opacity: 0; transform: translateY(40px); } /* [MODIFIÉ] Part d'un peu plus bas */
+    to { opacity: 0.5; transform: translateY(30px); }
+}
+
+
+/* --- HEADER (Menu) --- */
+.main-header {
+    position: fixed;
+    top: 0; width: 100%;
+    padding: 30px 50px;
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: rgba(0,0,0,0.2);
+    
+    /* [MODIFIÉ POUR RALENTIR] Durée passée à 1.8s */
+    animation: slideDownHeader 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.nav-container { display: flex; align-items: center; justify-content: space-between; }
+.nav-block { flex: 1; display: flex; }
+.nav-left { justify-content: flex-start; }
+.nav-right { justify-content: flex-end; }
+.nav-center { flex: 0; text-align: center; white-space: nowrap; }
+
+.nav-links a { 
+    color: #fff; text-decoration: none; font-size: 0.8rem; 
+    letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; 
+    opacity: 0.7;
+    display: flex; align-items: center; gap: 10px;
+}
+.nav-links a:hover { opacity: 1; color: #ffc107; }
+.logo h2 { font-weight: 800; letter-spacing: 8px; margin: 0; font-size: 1.2rem; }
+.logo span { color: #ffc107; }
+
+
+/* --- CONTENEUR PRINCIPAL --- */
+.split-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- SECTIONS MARQUES (Colonnes) --- */
+.brand-section {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-decoration: none;
+    cursor: pointer;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: flex 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+    
+    opacity: 0; 
+    /* [MODIFIÉ POUR RALENTIR] Durée passée de 0.8s à 1.6s */
+    animation: slideUpCol 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* [MODIFIÉ POUR RALENTIR] Augmentation des délais entre chaque colonne */
+.brand-section:nth-child(1) { animation-delay: 0.2s; } /* Mercedes */
+.brand-section:nth-child(2) { animation-delay: 0.5s; } /* Audi (+0.3s) */
+.brand-section:nth-child(3) { animation-delay: 0.8s; } /* BMW (+0.3s) */
+.brand-section:nth-child(4) { animation-delay: 1.1s; } /* Porsche (+0.3s) */
+
+
+/* Images de fond et Overlay */
+.mercedes { background: url('https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=1000') center/cover; }
+.audi { background: url('medias/audi2.avif') center/cover; }
+.bmw { background: url('medias/bmw3.jpg') center/cover; }
+.porsche { background: url('medias/porsche.avif') center/cover; }
+
+.brand-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    transition: background 0.5s ease;
+}
+
+.brand-section:hover { flex: 3; }
+.brand-section:hover::before { background: rgba(0, 0, 0, 0.3); }
+
+/* --- CONTENU TEXTE --- */
+.brand-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    
+    /* État de base (après animation) */
+    transform: translateY(30px);
+    opacity: 0.5;
+    transition: all 0.6s ease;
+
+    opacity: 0; /* Force à 0 avant l'anim */
+    /* [MODIFIÉ POUR RALENTIR] Durée du fade-in texte allongée à 1.6s */
+    animation: fadeInText 1.6s ease-out forwards;
+}
+
+/* [MODIFIÉ POUR RALENTIR] Délais du texte recalculés pour suivre les nouvelles colonnes */
+/* Règle : Délai colonne + environ 0.8s */
+.brand-section:nth-child(1) .brand-content { animation-delay: 1.0s; }
+.brand-section:nth-child(2) .brand-content { animation-delay: 1.3s; }
+.brand-section:nth-child(3) .brand-content { animation-delay: 1.6s; }
+.brand-section:nth-child(4) .brand-content { animation-delay: 1.9s; }
+
+
+/* Interaction Hover sur le texte */
+.brand-section:hover .brand-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.brand-content h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 10px;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.explore-tag {
+    display: block;
+    margin-top: 15px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #ffc107;
+    border-top: 1px solid rgba(255,193,7,0.3);
+    padding-top: 10px;
+}
+
+/* =========================================
+   RESPONSIVE (Mobile & Tablette)
+   ========================================= */
+
+@media (max-width: 900px) {
+    .main-header { padding: 20px 30px; }
+    .logo h2 { font-size: 1rem; letter-spacing: 4px; }
+    /* Sur tablette, on désactive l'anim complexe du texte */
+    .brand-content { opacity: 1 !important; transform: translateY(0) !important; animation: none; }
+}
+
+@media (max-width: 768px) {
+    body { overflow-y: auto; overflow-x: hidden; }
+    .main-header { padding: 15px 20px; background: rgba(0,0,0,0.9); }
+    .split-container { flex-direction: column; height: auto; padding-top: 60px; }
+
+    .brand-section {
+        width: 100%; height: 250px;
+        border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1);
+        flex: none; 
+        /* Sur mobile, on garde une animation plus simple et un peu plus rapide */
+        transform: translateY(0); 
+        animation: fadeInText 1.2s ease forwards;
+        /* On réinitialise les délais sur mobile pour qu'ils apparaissent dans l'ordre de scroll */
+        animation-delay: 0.2s; 
+    }
+    
+    /* Petit délai progressif sur mobile aussi */
+    .brand-section:nth-child(2) { animation-delay: 0.4s; }
+    .brand-section:nth-child(3) { animation-delay: 0.6s; }
+    .brand-section:nth-child(4) { animation-delay: 0.8s; }
+
+    .brand-section:hover { flex: none; }
+    .brand-content h2 { font-size: 1.8rem; letter-spacing: 5px; }
+}

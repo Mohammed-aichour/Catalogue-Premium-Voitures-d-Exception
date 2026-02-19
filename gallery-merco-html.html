@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie Collection | Mercedes-Benz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="gallery-merco-css.css">
+</head>
+<body>
+
+    <nav class="slider-nav">
+        <a href="page-merco.html" class="back-link">
+            <span class="icon">✕</span> Fermer
+        </a>
+        <div class="brand">MERCEDES-BENZ <span class="gold-txt">GALLERY</span></div>
+        <div class="slide-counter">
+            <span id="current-num">01</span><span class="divider">/</span><span id="total-num">10</span>
+        </div>
+    </nav>
+
+    <div class="slider-container">
+        
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/18.webp');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">L'Iconique</h2>
+                <p class="slide-desc">Une silhouette qui traverse le temps sans jamais vieillir.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/mc1.avif');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Sanctuaire</h2>
+                <p class="slide-desc">L'équilibre parfait entre sérénité absolue et haute technologie.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/mc2.webp');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Dynamisme</h2>
+                <p class="slide-desc">L'ingénierie allemande au service de l'émotion pure.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/mc3.avif');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Vision</h2>
+                <p class="slide-desc">Éclairer la route vers le futur de la mobilité moderne.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/mc4.avif');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Esthétique</h2>
+                <p class="slide-desc">La pureté sensuelle exprimée dans chaque ligne.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/mc5.avif');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Innovation</h2>
+                <p class="slide-desc">Toujours une longueur d'avance sur son temps.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/mc6.avif');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Excellence</h2>
+                <p class="slide-desc">Das Beste oder Nichts. Une promesse tenue.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/mc10.jpg');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Héritage</h2>
+                <p class="slide-desc">Plus d'un siècle de passion et de savoir-faire automobile.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/mc11.jpg');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Horizon</h2>
+                <p class="slide-desc">Conçue pour ceux qui tracent leur propre chemin.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-img" style="background-image: url('images/mc12.jpg');"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Avant-Garde</h2>
+                <p class="slide-desc">Redéfinir sans cesse les standards du luxe.</p>
+            </div>
+        </div>
+
+        <button class="nav-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="nav-btn next" onclick="changeSlide(1)">&#10095;</button>
+
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress"></div>
+        </div>
+
+    </div>
+
+    <script>
+        let index = 0;
+        const slides = document.querySelectorAll('.slide');
+        const currentNum = document.getElementById('current-num');
+        const progressBar = document.getElementById('progress');
+        const totalSlides = slides.length; // Calcule automatiquement le nombre de slides (10 ici)
+
+        // Met à jour le compteur total au démarrage
+        document.getElementById('total-num').innerText = totalSlides < 10 ? '0' + totalSlides : totalSlides;
+
+        function changeSlide(direction) {
+            // Retirer la classe active de la slide actuelle
+            slides[index].classList.remove('active');
+
+            // Calcul nouvel index (boucle infinie)
+            index += direction;
+            if (index >= totalSlides) index = 0;
+            if (index < 0) index = totalSlides - 1;
+
+            // Ajouter classe active à la nouvelle slide
+            slides[index].classList.add('active');
+
+            // Mise à jour compteur
+            currentNum.innerText = (index + 1) < 10 ? '0' + (index + 1) : (index + 1);
+
+            // Mise à jour barre de progression
+            const progressWidth = ((index + 1) / totalSlides) * 100;
+            progressBar.style.width = progressWidth + '%';
+        }
+
+        // Navigation clavier (Flèches)
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "ArrowRight") changeSlide(1);
+            if (event.key === "ArrowLeft") changeSlide(-1);
+        });
+
+        // Initialisation barre de progression
+        changeSlide(0);
+    </script>
+</body>
+</html>

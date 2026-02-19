@@ -1,0 +1,265 @@
+/* --- CONFIGURATION GLOBALE & POLICES --- */
+:root {
+    /* Couleurs BMW M */
+    --m-blue-light: #5CA2D6;
+    --m-blue-dark: #223774;
+    --m-red: #D62329;
+    
+    /* Fond optimisé (pas de blur) */
+    --glass-bg: rgba(18, 20, 25, 0.94); 
+    --glass-border: rgba(255, 255, 255, 0.1);
+    
+    /* Police Sport BMW */
+    --font-title: 'Orbitron', sans-serif;
+    --font-text: 'Chakra Petch', sans-serif;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: transparent; /* Important pour la vidéo */
+    font-family: var(--font-text);
+    overflow-x: hidden;
+}
+
+/* =========================================
+   1. INTRO "M POWER STRIPES"
+   ========================================= */
+.intro-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    /* Fond gris sombre technique */
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000000 80%);
+    
+    z-index: 9999;
+    display: flex; justify-content: center; align-items: center;
+    
+    animation: fadeOutIntro 0.5s ease-out 1.4s forwards;
+    pointer-events: none; 
+}
+
+.intro-content { 
+    text-align: center; 
+    display: flex; flex-direction: column; align-items: center; 
+    will-change: opacity;
+}
+
+.intro-logo-anim {
+    width: 100px; height: auto;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+    opacity: 0;
+    animation: logoSimpleAppear 0.8s ease-out forwards;
+}
+
+/* Les 3 bandes M */
+.m-stripes {
+    display: flex; gap: 5px; margin: 15px 0;
+    height: 4px; width: 0; /* S'élargit */
+    animation: stripesGrow 0.6s ease-out 0.3s forwards;
+    overflow: hidden;
+}
+.stripe { flex: 1; height: 100%; }
+.blue-light { background: var(--m-blue-light); }
+.blue-dark { background: var(--m-blue-dark); }
+.red { background: var(--m-red); }
+
+.intro-text {
+    font-family: var(--font-title);
+    color: #fff; font-size: 20px; letter-spacing: 3px;
+    opacity: 0;
+    animation: textSimpleAppear 0.6s ease-out 0.6s forwards;
+}
+
+@keyframes logoSimpleAppear { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+@keyframes stripesGrow { from { width: 0; } to { width: 120px; } }
+@keyframes textSimpleAppear { to { opacity: 0.9; } }
+@keyframes fadeOutIntro { to { opacity: 0; visibility: hidden; } }
+
+/* =========================================
+   2. VIDÉO & HEADER & BOUTON
+   ========================================= */
+.video-bg {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: -2;
+    transform: translateZ(0); will-change: transform; 
+}
+
+.video-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    /* Voile bleuté très sombre */
+    background: rgba(5, 10, 20, 0.5); 
+    z-index: -1;
+}
+
+/* BOUTON RETOUR BMW */
+.btn-retour {
+    position: absolute; top: 40px; left: 40px; z-index: 100;
+    display: inline-block; text-decoration: none;
+    font-family: var(--font-text); font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 10px 25px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    opacity: 0; animation: fadeInSimple 0.8s ease-out 1.4s forwards;
+}
+
+.btn-retour:hover {
+    border-color: var(--m-blue-light);
+    color: var(--m-blue-light);
+    background: rgba(0, 0, 0, 0.8);
+    padding-left: 20px; padding-right: 30px;
+}
+
+.hero-header {
+    text-align: center; padding-top: 70px; padding-bottom: 50px;
+    color: #ffffff; opacity: 0;
+    animation: fadeInSimple 0.8s ease-out 1.5s forwards;
+}
+
+.hero-logo {
+    width: 75px; height: auto; margin-bottom: 10px;
+    opacity: 0.95;
+    transition: transform 0.3s ease;
+}
+.hero-logo:hover { transform: scale(1.05); }
+
+.hero-title {
+    font-family: var(--font-title); font-size: 48px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 4px; margin: 0;
+    font-style: italic; /* Touche dynamique M */
+}
+
+.hero-subtitle {
+    font-size: 14px; color: #e0e0e0; text-transform: uppercase;
+    letter-spacing: 3px; margin-top: 5px; font-weight: 600;
+}
+
+.hero-line {
+    width: 90px; height: 4px;
+    /* Dégradé M */
+    background: linear-gradient(90deg, var(--m-blue-light), var(--m-blue-dark), var(--m-red));
+    margin: 25px auto 0;
+}
+
+/* =========================================
+   3. CARTES "M-PERFORMANCE GLASS" (Agrandies)
+   ========================================= */
+.cars-card {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 30px; 
+    max-width: 1650px; /* Élargi */
+    margin: 0 auto; padding: 0 30px 60px 30px;
+    opacity: 0;
+    animation: slideUpSimple 0.8s ease-out 1.7s forwards;
+}
+
+.premium-glass {
+    display: block; text-decoration: none;
+    background-color: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 4px; /* Angles un peu plus durs pour BMW */
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    transform: translateZ(0);
+}
+
+.premium-glass:hover {
+    transform: translateY(-8px);
+    border-color: var(--m-blue-light); /* Bordure bleue M au survol */
+}
+
+.card-image-wrapper { 
+    position: relative; 
+    overflow: hidden; 
+    height: 250px; /* Hauteur augmentée */
+}
+
+.card-image-wrapper img, .card-image-h img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.premium-glass:hover img { transform: scale(1.05); }
+
+/* Badges */
+.badge-status {
+    position: absolute; top: 12px; left: 12px;
+    background: rgba(0,0,0,0.9); color: #fff;
+    padding: 5px 12px; border-radius: 2px;
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; z-index: 10;
+    border-left: 3px solid #fff;
+    font-family: var(--font-title);
+}
+.m-badge { border-left-color: var(--m-blue-light); border-right: 3px solid var(--m-red); }
+.accent-blue { border-left-color: var(--m-blue-light); }
+.accent-green { border-left-color: #4cd964; }
+
+/* Contenu */
+.card-content { padding: 20px; color: #fff; }
+.header-group { text-align: center; margin-bottom: 20px; }
+
+.car-title {
+    font-family: var(--font-title); font-size: 19px; margin: 0;
+    letter-spacing: 0.5px; color: #fff; font-weight: 700;
+}
+.car-price {
+    display: block; margin-top: 5px; font-size: 16px;
+    color: var(--m-blue-light); font-weight: 700;
+}
+
+/* Specs */
+.specs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+.spec-tag, .spec-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 3px; padding: 8px 4px;
+    text-align: center; display: flex; flex-direction: column; justify-content: center;
+}
+.premium-glass:hover .spec-tag { background-color: rgba(92, 162, 214, 0.15); /* Bleu très léger */ }
+
+.label { font-size: 9px; color: #aaa; text-transform: uppercase; margin-bottom: 2px; letter-spacing: 1px; }
+.value { font-size: 12px; font-weight: 700; color: #fff; }
+
+/* Horizontal Card */
+.car-card-horizontal {
+    grid-column: 1 / -1; justify-self: center;
+    width: 850px; /* Élargie */
+    height: 280px; /* Hauteur augmentée */
+    margin-top: 30px;
+    display: flex; flex-direction: row;
+}
+
+.card-image-h { 
+    width: 42%; 
+    height: 100%; 
+    background: #000; 
+    position: relative;
+    overflow: hidden;
+}
+
+.card-content-h { width: 58%; padding: 25px; display: flex; flex-direction: column; justify-content: center; }
+.card-header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 15px;
+}
+
+/* Responsive & Anim */
+@media (max-width: 1200px) { .cars-card { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 900px) {
+    .cars-card { grid-template-columns: 1fr; }
+    
+    .btn-retour { top: 20px; left: 20px; padding: 8px 15px; font-size: 10px; }
+
+    .car-card-horizontal { width: 100%; height: auto; flex-direction: column; }
+    .card-image-h { width: 100%; height: 200px; }
+    .card-content-h { width: 100%; box-sizing: border-box; }
+    .hero-title { font-size: 34px; }
+}
+
+@keyframes fadeInSimple { to { opacity: 1; } }
+@keyframes slideUpSimple { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }

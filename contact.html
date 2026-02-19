@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Premium Auto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- BASE STYLES (Même base que l'accueil) --- */
+        :root { --primary: #d4af37; --bg: #000; --text: #fff; --glass: rgba(20,20,20,0.8); }
+        body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+        
+        /* IMAGE DE FOND (Fixe) */
+        .bg-fixed {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1486006920555-c77dcf18193c?q=80&w=1920') center/cover;
+        }
+
+        /* HEADER SIMPLIFIÉ */
+        header { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo { font-weight: 800; letter-spacing: 4px; color: #fff; text-decoration: none; }
+        .back-btn { color: #fff; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .back-btn:hover { color: var(--primary); }
+
+        /* --- CONTENU CONTACT --- */
+        .contact-container {
+            display: flex; min-height: 85vh; padding: 50px;
+            gap: 50px; align-items: center; justify-content: center;
+        }
+
+        /* Colonne Gauche : Infos */
+        .info-box { flex: 1; padding: 20px; animation: slideInLeft 1s ease forwards; opacity: 0; }
+        .info-box h1 { font-size: 3rem; margin-bottom: 20px; line-height: 1.1; }
+        .info-box span { color: var(--primary); }
+        .info-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; font-weight: 300; }
+        .info-item i { color: var(--primary); font-size: 1.2rem; }
+
+        /* Colonne Droite : Formulaire */
+        .form-box { 
+            flex: 1; background: var(--glass); padding: 40px; border-radius: 10px; 
+            border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            animation: slideInRight 1s ease forwards; opacity: 0;
+        }
+
+        .input-group { margin-bottom: 30px; position: relative; }
+        .input-group label { display: block; font-size: 0.8rem; margin-bottom: 5px; color: #aaa; }
+        
+        /* Style des inputs (Ligne uniquement) */
+        input, textarea {
+            width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.3);
+            color: #fff; padding: 10px 0; font-family: 'Poppins'; font-size: 1rem; outline: none; transition: 0.3s;
+        }
+        input:focus, textarea:focus { border-bottom-color: var(--primary); }
+
+        .btn-submit {
+            background: transparent; color: var(--primary); border: 1px solid var(--primary);
+            padding: 15px 40px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+            cursor: pointer; transition: 0.3s; width: 100%;
+        }
+        .btn-submit:hover { background: var(--primary); color: #000; }
+
+        /* ANIMATIONS */
+        @keyframes slideInLeft { from { transform: translateX(-50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInRight { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .contact-container { flex-direction: column; padding: 20px; }
+            .info-box h1 { font-size: 2rem; }
+            .form-box { width: 100%; padding: 20px; }
+            header { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-fixed"></div>
+
+    <header>
+        <a href="index.html" class="back-btn"><i class="fa fa-arrow-left"></i> Retour</a>
+        <a href="collection.html" class="logo">CONTACT</a>
+    </header>
+
+    <div class="contact-container">
+        <div class="info-box">
+            <h1>PARLONS <br> <span>D'EXCEPTION</span></h1>
+            <p style="color: #ccc; margin-bottom: 40px;">Nos concierges sont à votre entière écoute pour personnaliser votre expérience selon vos envies.</p>
+            
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <p>Marina Casablanca, Maroc</p>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-phone-alt"></i>
+                <p>+212 5 22 00 00 00</p>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <p>contact@premium-auto.ma</p>
+            </div>
+        </div>
+
+        <div class="form-box">
+            <form>
+                <div class="input-group">
+                    <label>Votre Nom</label>
+                    <input type="text" placeholder="Entrez votre nom complet">
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="votre@email.com">
+                </div>
+                <div class="input-group">
+                    <label>Message</label>
+                    <textarea rows="4" placeholder="Je suis intéressé par..."></textarea>
+                </div>
+                <button type="button" class="btn-submit">Envoyer</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

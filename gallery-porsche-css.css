@@ -1,0 +1,133 @@
+/* --- RESET & FONTS --- */
+:root {
+    --porsche-yellow: #f5c211; /* Le fameux Speed Yellow */
+    --dark-bg: #111;
+    --font-title: 'Antonio', sans-serif;
+    --font-text: 'Inter', sans-serif;
+}
+
+body, html {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    overflow: hidden; 
+    background-color: var(--dark-bg);
+    font-family: var(--font-text);
+}
+
+/* --- HEADER --- */
+.slider-nav {
+    position: absolute; top: 0; left: 0; width: 100%;
+    padding: 40px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 100; box-sizing: border-box;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.1); /* Ligne fine technique */
+}
+
+.back-link {
+    text-decoration: none; color: #fff; text-transform: uppercase;
+    font-size: 12px; letter-spacing: 1px; opacity: 0.6; transition: 0.3s;
+}
+.back-link:hover { opacity: 1; color: var(--porsche-yellow); }
+
+.brand { 
+    font-size: 24px; font-weight: 700; letter-spacing: 4px; /* Espacement large typique Porsche */
+    font-family: var(--font-title); 
+}
+.model-badge {
+    font-weight: 100; color: var(--porsche-yellow);
+}
+
+.slide-counter {
+    font-family: var(--font-title); font-size: 20px; color: #fff;
+    display: flex; align-items: center; gap: 10px;
+}
+.bar { 
+    display: inline-block; width: 30px; height: 1px; background: #fff; 
+}
+
+/* --- SLIDER --- */
+.slider-container { position: relative; width: 100%; height: 100%; }
+
+.slide {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0; transition: opacity 1s ease; z-index: 1;
+}
+
+.slide.active { opacity: 1; z-index: 2; }
+
+.slide-img {
+    width: 100%; height: 100%;
+    background-size: cover; background-position: center;
+    transform: scale(1.05);
+    transition: transform 6s ease-out; /* Zoom très subtil */
+}
+.slide.active .slide-img { transform: scale(1); }
+
+/* Filtre gris foncé élégant */
+.slide::after {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+}
+
+/* --- TEXTE --- */
+.slide-content {
+    position: absolute; top: 50%; left: 50%; /* Centré pour Porsche */
+    transform: translate(-50%, -40%); /* Un peu vers le haut */
+    text-align: center;
+    z-index: 10; color: #fff;
+    opacity: 0; transition: all 0.8s ease;
+}
+
+.slide.active .slide-content {
+    transform: translate(-50%, -50%);
+    opacity: 1; transition-delay: 0.3s; 
+}
+
+.slide-title {
+    font-family: var(--font-title);
+    font-size: 6rem; margin: 0;
+    text-transform: uppercase; letter-spacing: 2px;
+}
+
+.slide-desc {
+    font-size: 16px; font-weight: 300; margin-top: 10px; color: #ccc;
+    background: rgba(0,0,0,0.6); display: inline-block; padding: 5px 15px;
+    border-radius: 20px; /* Bord arrondi style "capsule" */
+}
+
+/* --- CONTROLES EN BAS (Tableau de bord) --- */
+.nav-controls {
+    position: absolute; bottom: 50px; left: 50%; 
+    transform: translateX(-50%);
+    display: flex; align-items: center; gap: 20px;
+    z-index: 20; width: 300px;
+}
+
+.nav-btn {
+    background: transparent; border: 1px solid rgba(255,255,255,0.3);
+    color: #fff; width: 40px; height: 40px; border-radius: 50%;
+    cursor: pointer; transition: 0.3s;
+    display: flex; align-items: center; justify-content: center;
+}
+.nav-btn:hover {
+    border-color: var(--porsche-yellow); color: var(--porsche-yellow);
+}
+
+.progress-track {
+    flex-grow: 1; height: 2px; background: rgba(255,255,255,0.2);
+    position: relative;
+}
+.progress-bar {
+    height: 100%; background: var(--porsche-yellow); width: 0%;
+    position: absolute; top: 0; left: 0;
+    transition: width 0.5s ease;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .slide-title { font-size: 3.5rem; }
+    .slide-content { width: 90%; }
+    .nav-controls { width: 80%; bottom: 30px; }
+    .slider-nav { padding: 20px; }
+}

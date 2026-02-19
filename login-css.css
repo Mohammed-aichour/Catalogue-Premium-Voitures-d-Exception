@@ -1,0 +1,146 @@
+/* --- CONFIG GLOBAL --- */
+:root {
+    --primary-accent: #ffc107; /* Or */
+    --glass-bg: rgba(20, 20, 20, 0.75); 
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-light: #ffffff;
+    --text-muted: #aaaaaa;
+    /* Image de fond */
+    --bg-image-url: url('https://images.unsplash.com/photo-1562426509-5044a121aa49?q=80&w=2070&auto=format&fit=crop');
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), var(--bg-image-url);
+    background-size: cover;
+    background-position: center;
+    color: var(--text-light);
+    overflow: hidden;
+}
+
+/* --- BOUTON RETOUR --- */
+.btn-home {
+    position: absolute; top: 30px; left: 30px;
+    color: var(--text-light); text-decoration: none;
+    font-weight: 500; font-size: 0.9rem; letter-spacing: 1px;
+    display: flex; align-items: center; gap: 10px; z-index: 100;
+    transition: 0.3s ease; opacity: 0.7;
+}
+.btn-home:hover { color: var(--primary-accent); opacity: 1; }
+.btn-home i { transition: transform 0.3s ease; }
+.btn-home:hover i { transform: translateX(-5px); }
+
+/* --- LAYOUT PRINCIPAL --- */
+.login-wrapper {
+    height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+}
+
+/* --- LA CARTE GLASSMORPHISM --- */
+.glass-container {
+    width: 420px;
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    overflow: hidden; 
+    position: relative;
+}
+
+/* --- LES ONGLETS (TABS) --- */
+.form-tabs {
+    display: flex; position: relative;
+    margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.tab-btn {
+    flex: 1; 
+    background: none; border: none;
+    padding: 15px 0; color: var(--text-muted);
+    font-size: 1rem; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; cursor: pointer; transition: 0.3s;
+}
+.tab-btn.active { color: var(--text-light); }
+
+.tab-indicator {
+    position: absolute; bottom: 0; left: 0;
+    width: 50%; height: 3px;
+    background-color: var(--primary-accent);
+    transition: left 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* --- LE SLIDER HORIZONTAL --- */
+.form-viewport {
+    width: 100%; overflow: hidden;
+}
+.form-track {
+    display: flex; 
+    width: 200%; 
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* --- GESTION DE LA LUMINOSITÉ (CORRIGÉE) --- */
+.form-box {
+    width: 50%; 
+    padding: 10px 5px;
+    /* Par défaut, c'est un peu éteint pour donner de la profondeur */
+    opacity: 0.3; 
+    transition: opacity 0.4s ease-in-out; 
+    /* Petit effet de flou pour celui qui n'est pas actif */
+    filter: blur(2px);
+}
+
+/* QUAND C'EST ACTIF (via JS) -> Pleine lumière */
+.form-box.active-box {
+    opacity: 1;
+    filter: blur(0);
+}
+
+
+/* --- STYLES DU FORMULAIRE --- */
+h4 { font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; }
+.form-subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 25px; }
+
+.input-group {
+    position: relative; margin-bottom: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
+    transition: 0.3s;
+}
+.input-group:focus-within {
+    border-color: var(--primary-accent);
+    background: rgba(255,255,255,0.08);
+}
+.input-group i {
+    position: absolute; left: 20px; top: 50%;
+    transform: translateY(-50%); color: var(--primary-accent);
+}
+.input-group input {
+    width: 100%; padding: 16px 20px 16px 55px;
+    background: none; border: none; outline: none;
+    color: var(--text-light); font-weight: 500;
+}
+.input-group input::placeholder { color: rgba(255,255,255,0.4); }
+
+.actions { text-align: right; margin-bottom: 25px; font-size: 0.9rem; }
+.forgot-link { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+.forgot-link:hover { color: var(--primary-accent); }
+
+.btn-submit {
+    width: 100%; padding: 16px;
+    border: none; border-radius: 12px;
+    background: var(--primary-accent);
+    color: #000; font-size: 1rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    cursor: pointer; transition: 0.3s;
+    box-shadow: 0 10px 20px -10px rgba(255, 193, 7, 0.5);
+}
+.btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px -10px rgba(255, 193, 7, 0.7);
+    background-color: #fff;
+}

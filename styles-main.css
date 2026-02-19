@@ -1,0 +1,197 @@
+/* --- CONFIGURATION GLOBALE --- */
+:root {
+    --primary-color: #ffc107;
+    --text-light: #ffffff;
+    --text-silver: #e0e0e0;
+}
+
+body {
+    margin: 0; padding: 0;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-light);
+    height: 100vh;
+    overflow: hidden; 
+    position: relative;
+}
+
+/* --- IMAGE DE FOND ANIMÉE --- */
+.bg-animation {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=2070') no-repeat center center;
+    background-size: cover;
+    z-index: -1;
+    animation: smoothZoom 2s ease-out forwards;
+}
+
+@keyframes smoothZoom {
+    0% { transform: scale(1.15); filter: brightness(0.5); }
+    100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* --- ANIMATIONS D'ENTRÉE --- */
+
+/* 1. Header */
+.slide-down {
+    animation: slideDownFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+@keyframes slideDownFade {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* 2. Textes standards (Monter tout droit) */
+.animate-item {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+@keyframes fadeInUp {
+    from { transform: translateY(40px); opacity: 0; filter: blur(5px); }
+    to { transform: translateY(0); opacity: 1; filter: blur(0); }
+}
+
+/* 3. Délais */
+.delay-1 { animation-delay: 0.3s; }
+.delay-2 { animation-delay: 0.5s; }
+.delay-3 { animation-delay: 0.7s; }
+.delay-4 { animation-delay: 0.9s; }
+.delay-5 { animation-delay: 1.2s; }
+
+/* --- NAVIGATION --- */
+.main-header {
+    padding: 20px 50px;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.nav-container { display: flex; align-items: center; width: 100%; }
+.nav-block-left { flex: 1; display: flex; justify-content: flex-start; }
+.nav-block-right { flex: 1; display: flex; justify-content: flex-end; }
+.nav-block-center { flex: 0 0 auto; }
+
+.nav-links { display: flex; gap: 30px; }
+.nav-links a, .drop-trigger {
+    color: var(--text-light); text-decoration: none;
+    font-weight: 300; letter-spacing: 1px; font-size: 0.9rem;
+    transition: 0.3s; cursor: pointer;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--primary-color); }
+
+.logo h2 { margin: 0; font-weight: 800; letter-spacing: 4px; font-size: 1.5rem; white-space: nowrap; }
+.logo span { color: var(--primary-color); }
+
+.btn-modern {
+    padding: 10px 30px; background: transparent; color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 4px;
+    font-weight: 500 !important; text-transform: uppercase;
+    letter-spacing: 1px; font-size: 0.8rem; transition: all 0.3s ease;
+    text-decoration: none;
+}
+.btn-modern:hover {
+    background: #ffc107; color: black !important;
+    border-color: white; box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.custom-dropdown { position: relative; }
+.dropdown-content {
+    position: absolute; top: 40px; left: 0; background: rgba(0, 0, 0, 0.9);
+    min-width: 200px; border-radius: 8px; opacity: 0; visibility: hidden;
+    transform: translateY(10px); transition: all 0.3s; padding: 10px 0; z-index: 100;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.dropdown-content.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-content a { display: block; padding: 10px 20px; }
+.dropdown-content a:hover { background: rgba(255,255,255,0.1); color: var(--primary-color); }
+.arrow-icon { transition: transform 0.3s; }
+.arrow-icon.rotate { transform: rotate(180deg); }
+
+/* --- HERO SECTION --- */
+.hero-section {
+    height: 65vh; display: flex;
+    align-items: center; justify-content: center; text-align: center;
+}
+.hero-content { position: relative; }
+
+.hero-subtitle {
+    text-transform: uppercase; letter-spacing: 8px; font-size: 0.9rem;
+    color: var(--primary-color); margin-bottom: 10px;
+}
+.hero-title { font-size: 5.5rem; font-weight: 800; line-height: 1; margin-bottom: 30px; }
+.hero-title span {
+    background: linear-gradient(to right, #fff, #999);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.ticker-wrapper {
+    width: 90%; max-width: 900px; overflow: hidden;
+    margin: 0 auto 40px auto; background: rgba(255, 255, 255, 0.05);
+    padding: 12px 0; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.ticker-text {
+    white-space: nowrap; animation: slide 25s linear infinite;
+    font-size: 1.3rem; font-weight: 400; color: var(--text-silver);
+    letter-spacing: 1.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+@keyframes slide {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+}
+
+.btn-explore {
+    padding: 15px 45px; background: transparent; border: 1px solid white;
+    color: white; text-transform: uppercase; letter-spacing: 2px;
+    font-size: 0.8rem; transition: 0.4s; cursor: pointer;
+}
+.btn-explore:hover { background: white; color: black; }
+
+/* --- MONTRE (CORRIGÉE) --- */
+.dashboard-clock {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    /* Note : le transform ici sert de position par défaut, 
+       mais c'est l'animation qui va gérer le mouvement final */
+    transform: translateX(-50%); 
+    z-index: 1000;
+}
+
+/* Cette règle force l'utilisation de l'animation spéciale pour la montre */
+.dashboard-clock.animate-item {
+    animation-name: fadeInUpCentered;
+}
+
+/* Animation spéciale qui garde le translateX(-50%) pendant la montée */
+@keyframes fadeInUpCentered {
+    from {
+        transform: translate(-50%, 40px); /* Centré X, décalé Y bas */
+        opacity: 0;
+        filter: blur(5px);
+    }
+    to {
+        transform: translate(-50%, 0); /* Centré X, position finale Y */
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+.clock-glass {
+    background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 15px 50px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+.time-display {
+    display: flex; align-items: baseline; justify-content: center;
+    color: white; line-height: 1;
+}
+#hours, #minutes { font-size: 3rem; font-weight: 700; letter-spacing: -1px; }
+.separator { font-size: 2.5rem; margin: 0 8px; opacity: 0.8; animation: blink 1s infinite; }
+.seconds-small {
+    font-size: 1rem; font-weight: 400; color: var(--primary-color); margin-left: 8px;
+}
+.date-display {
+    font-size: 0.7rem; letter-spacing: 4px; color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase; margin-top: 8px; padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+@keyframes blink { 50% { opacity: 0.3; } }
