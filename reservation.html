@@ -109,15 +109,20 @@
 
                 <div class="form-group">
                     <label>Date Souhaitée</label>
-                    <input type="date">
+                    <input type="date" id="dateInput" required>
                 </div>
 
                 <div class="form-group">
                     <label>Numéro de téléphone</label>
-                    <input type="text" placeholder="+212 6..." >
+                    <input type="text" id="phoneInput" placeholder="+212 6..." required>
                 </div>
 
-                <button type="button" class="btn-book">Confirmer la demande</button>
+                <button type="button" id="bookBtn" class="btn-book">Confirmer la demande</button>
+                <div id="bookingConfirmation" style="display:none; margin-top:20px; padding:15px; border:1px solid #d4af37; background:rgba(212,175,55,0.1); border-radius:4px; text-align:center; color:#fff;">
+                    <i class="fas fa-check-circle" style="color:#d4af37; font-size:1.5rem; margin-bottom:8px; display:block;"></i>
+                    <strong style="color:#d4af37;">Demande enregistrée avec succès !</strong>
+                    <p id="bookingRef" style="font-size:0.8rem; margin:6px 0 0; color:#ccc;"></p>
+                </div>
             </form>
         </div>
     </div>
@@ -195,6 +200,43 @@
                 modelSelect.add(option);
             }
         }
+
+        document.getElementById("bookBtn").addEventListener("click", function() {
+            const brandSelect = document.getElementById("brandSelect");
+            const modelSelect = document.getElementById("modelSelect");
+            const dateInput = document.getElementById("dateInput");
+            const phoneInput = document.getElementById("phoneInput");
+            const confirmBox = document.getElementById("bookingConfirmation");
+            const refText = document.getElementById("bookingRef");
+
+            if (!brandSelect.value || !modelSelect.value || !dateInput.value || !phoneInput.value.trim()) {
+                alert("Veuillez renseigner tous les champs obligatoires (Marque, Modèle, Date et Téléphone).");
+                return;
+            }
+
+            const refId = "PREMIUM-" + Date.now().toString(36).toUpperCase();
+            const reservation = {
+                id: refId,
+                brand: brandSelect.value,
+                model: modelSelect.value,
+                date: dateInput.value,
+                phone: phoneInput.value.trim(),
+                createdAt: new Date().toISOString()
+            };
+
+            try {
+                const stored = JSON.parse(localStorage.getItem("premium_car_reservations") || "[]");
+                stored.push(reservation);
+                localStorage.setItem("premium_car_reservations", JSON.stringify(stored));
+            } catch (e) {
+                console.warn("Storage error", e);
+            }
+
+            refText.textContent = `Référence VIP : ${refId} · ${modelSelect.value} pour le ${dateInput.value}`;
+            confirmBox.style.display = "block";
+            this.disabled = true;
+            this.textContent = "Demande envoyée";
+        });
     </script>
 </body>
 </html>
