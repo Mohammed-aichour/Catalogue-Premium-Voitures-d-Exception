@@ -8,6 +8,10 @@
 [![Bootstrap 5](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 [![GitHub Pages](https://img.shields.io/badge/Deployment-GitHub_Pages-brightgreen?logo=github)](https://mohammed-aichour.github.io/Catalogue-Premium-Voitures-d-Exception/)
 
+<p align="center">
+  <img src="screenshots/catalogue_premium_preview.png" alt="Aperçu Catalogue Premium" width="100%">
+</p>
+
 ---
 
 ## 🌟 Présentation du Projet
