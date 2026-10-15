@@ -52,6 +52,28 @@ Le projet offre une expérience utilisateur immersive combinant typographie soig
 
 ---
 
+## 🏛️ Flux Utilisateur & Réservation VIP
+
+```mermaid
+flowchart TD
+    Index["Page Principale (index.html)<br>Horloge Luxe Live & Ticker Modèles"] --> Collection["Showroom Global (collection.html)<br>Filtres par Catégorie"]
+    
+    Collection --> Audi["Showroom Audi Sport (page-audi-html.html)<br>RS Q8, RS6 Avant"]
+    Collection --> BMW["Showroom BMW M (page-bmw-html.html)<br>M4 CSL, M8 Gran Coupé"]
+    Collection --> Merco["Showroom Mercedes (page-merco.html)<br>AMG SL Roadster, Maybach S-Class"]
+    Collection --> Porsche["Showroom Porsche (page-porsche-html.html)<br>911 GT3 RS, Taycan Turbo S"]
+
+    Audi --> Reservation["Module Réservation VIP (reservation.html)<br>Formulaire interactif & Devis"]
+    BMW --> Reservation
+    Merco --> Reservation
+    Porsche --> Reservation
+
+    Reservation --> Storage["LocalStorage : premium_car_reservations"]
+    ThemeSwitch["Basculeur de Thème Luxe (script-login.js)"] -.-> Login["Espace Membre (login.html)"]
+```
+
+---
+
 ## 🛠️ Stack Technique
 
 * **Structure** : HTML5 sémantique, balisage SEO et balises OpenGraph.
